@@ -13,10 +13,10 @@ const DB_NAME = process.env.DB_NAME;
 
 app.use(morgan('combined'));
 app.use(cors(require('./cors')));
-// app.use(bodyParser.json()); // TODO: Think about options
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); // TODO: Think about options
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// require('./routes')(app);
+require('./routes')(app);
 
 app.get('/', (req, res) => {
     res.send({
