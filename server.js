@@ -12,13 +12,13 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_NAME = process.env.DB_NAME;
 
 app.use(morgan('combined'));
-// app.use(cors(require('./cors')));
+app.use(cors(require('./cors')));
 // app.use(bodyParser.json()); // TODO: Think about options
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 // require('./routes')(app);
 
-app.get('/heh', (req, res) => {
+app.get('/', (req, res) => {
     res.send({
         kek: 'test',
     });
