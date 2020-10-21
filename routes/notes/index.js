@@ -18,4 +18,17 @@ notesRouter.post('/', (req, res) => {
     .then(newNote => res.status(201).send(newNote));
 });
 
+notesRouter.delete('/:id',  async (req, res) => {
+  const noteId = req.params['id'];
+  const deletedNote = await notesService.getNoteById(noteId);
+  notesService.deleteNote(noteId)
+    .then((dbResponse) => {
+      if (dbResponse.ok) {
+        res.status(200).send(deletedNote);
+      } else {
+        res.status(400).send({ dbResponse, message: 'Note deletion error!' }); // TODO: Make common error view
+      }
+    });
+});
+
 module.exports = notesRouter;

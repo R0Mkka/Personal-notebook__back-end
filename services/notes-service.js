@@ -1,6 +1,14 @@
 const Note = require('../schemas/note.schema');
 
 class NotesService {
+  getNoteById(noteId) {
+    return Note.findById(noteId)
+      .catch((error) => {
+        console.error('ERROR WHILE GETTING NOTE BY ID!', error);
+        return error;
+      });
+  }
+
   getAllNotes() {
     return Note.find()
       .catch((error) => {
@@ -24,6 +32,14 @@ class NotesService {
         console.error('ERROR WHILE NOTE ADDING!', error);
         return error;
       });
+  }
+
+  deleteNote(noteId) {
+    return Note.deleteOne({ _id: noteId })
+      .catch((error) => {
+        console.error('ERROR WHILE NOTE DELETING!', error);
+        return error;
+      })
   }
 }
 
