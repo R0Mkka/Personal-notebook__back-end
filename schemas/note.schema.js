@@ -3,6 +3,10 @@ const { Schema } = mongoose;
 
 const NoteSchema = new Schema(
   {
+    id: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: false,

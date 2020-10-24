@@ -1,3 +1,4 @@
+const idGenerationService = require('./id-generation-service');
 const Note = require('../schemas/note.schema');
 
 class NotesService {
@@ -25,11 +26,12 @@ class NotesService {
       });
   }
 
-  addNote(noteData) {
-    const note = new Note(noteData);
+  createNote(noteData) {
+    const id = idGenerationService.generate();
+    const note = new Note({ id, ...noteData });
     return note.save()
       .catch((error) => {
-        console.error('ERROR WHILE NOTE ADDING!', error);
+        console.error('ERROR WHILE NOTE CREATION!', error);
         return error;
       });
   }

@@ -14,12 +14,12 @@ notesRouter.get('/', (req, res) => {
 });
 
 notesRouter.post('/', (req, res) => {
-  notesService.addNote(req.body)
+  notesService.createNote(req.body)
     .then(newNote => res.status(201).send(newNote));
 });
 
-notesRouter.delete('/:id',  async (req, res) => {
-  const noteId = req.params['id'];
+notesRouter.delete('/:noteId',  async (req, res) => {
+  const { noteId } = req.params;
   const deletedNote = await notesService.getNoteById(noteId);
   notesService.deleteNote(noteId)
     .then((dbResponse) => {
